@@ -535,11 +535,18 @@ regions = {'451381': '合山市', '542336': '聂拉木县', '320902': '亭湖区
 import re
 idcard=input('请输入十八位身份证号码: ')
 def id(idcard):
+  jqyz=[7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2]
+  jyw=['1','0','X','9','8','7','6','5','4','3','2']
+  x=0
   if len(idcard)==18:
     if re.match(r"^\d{17}(\d|X|x)$",idcard):
-      return '身份证号码检验合格'
-  else:
-    return '身份证号码不合法'
+      for i in range(len(jqyz)):
+        x=x+int(idcard[i])*jqyz[i]
+        i=i+1
+      if idcard[-1]==jyw[x%11]:
+        return '身份证号码检验合格'
+      else:
+        return '身份证号码不合法'
 print (id(idcard))
 
 def area(idcard):
